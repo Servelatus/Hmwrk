@@ -1,21 +1,8 @@
-# 3. Реализовать функцию my_func(), которая принимает три позиционных аргумента,
-# и возвращает сумму наибольших двух аргументов.
+# 4 3. Для чисел в пределах от 20 до 240 найти числа, кратные 20 или 21. Необходимо решить задание в одну строку.
+# Подсказка: использовать функцию range() и генератор.
 
-def my_func(a, b, c):
-    if a < b:
-        a, b = b, a
-    if b > c:
-        max = a + b
-    else:
-        max = a + c
-    return max
+print([x for x in range(20, 241, 20)]+[x  for x in range(21, 241, 21)])
 
-def input_arg():
-    arg_in = input("Введите через пробел три аргумента: ").split()
-    arg =[int(i) for i in arg_in]
-    print(my_func(arg[0], arg[1], arg[2]))
+# или так
 
-def run():
-    input_arg()
-
-run()
+# print([x for x in range(20, 241) if x % 20 == 0 or x % 21 == 0])
