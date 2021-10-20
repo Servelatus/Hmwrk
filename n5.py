@@ -1,18 +1,14 @@
-# 5. Реализовать формирование списка, используя функцию range()
-# и возможности генератора. В список должны войти четные числа от 100 до 1000 (включая границы).
-# Необходимо получить результат вычисления произведения всех элементов списка.
-# Подсказка: использовать функцию reduce().
+# 5. Создать (программно) текстовый файл, записать в него программно набор чисел, разделенных пробелами.
+# Программа должна подсчитывать сумму чисел в файле и выводить ее на экран.
 
-from functools import reduce
+from random import randrange
 
-print(reduce(lambda a, b: a * b , [x for x in range(100, 1001, 2)]))
-
-
-
-
-# def product(a, b):
-#     return a * b
-#
-# numb_list = [x for x in range(100, 1001, 2)]
-#
-# print(reduce(product, numb_list))
+with open('file5.txt', 'w+') as f:
+    for i in range(randrange(100)):
+        f.write(str(randrange(100)) + ' ')
+    f.seek(0)
+    number_list = f.read().split()
+    sum_value = 0
+    for i in number_list:
+        sum_value += int(i)
+    print(sum_value)
