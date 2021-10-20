@@ -1,0 +1,5 @@
+Microsoft OOO 7000 6000
+Apple OOO 10000 5000 
+Sberbank PAO 1000 500
+Pupkin_Ko ZAO 100 150
+Tesla OOO 500 5000

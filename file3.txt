@@ -1,0 +1,8 @@
+Bronshtein 10000
+Stallone 50000
+Gundiaev 100000
+Putin 1
+Gauss 30000
+Viett 40000
+Matiz 3000
+Iuda 30
