@@ -1,5 +1,0 @@
-first sting
-second string
-Middle
-penultimate line
-last line

@@ -1,37 +1,32 @@
-# 3. Создать текстовый файл (не программно),
-# построчно записать фамилии сотрудников и величину их окладов.
-# Определить, кто из сотрудников имеет оклад менее 20 тыс.,
-# вывести фамилии этих сотрудников. Выполнить подсчет средней
-# величины дохода сотрудников.
+# 3. Реализовать базовый класс Worker (работник),
+# в котором определить атрибуты: name, surname, position (должность), income (доход).
+# Последний атрибут должен быть защищенным и ссылаться на словарь, содержащий элементы: оклад и премия,
+# например, {"wage": wage, "bonus": bonus}. Создать класс Position (должность) на базе класса Worker.
+# В классе Position реализовать методы получения полного имени сотрудника (get_full_name) и дохода с учетом премии (get_total_income).
+# Проверить работу примера на реальных данных
+# (создать экземпляры класса Position, передать данные, проверить значения атрибутов, вызвать методы экземпляров).
 
-def read_file():
-    with open('file3.txt', 'r') as f:
-        wage_list = f.read()
-        print(wage_list)
-        wage_list = wage_list.split()
-    return wage_list
+class Worker:
+    def __init__(self, name, surname, position, wage, bonus):
+        self.name = name
+        self.surname = surname
+        self.position = position
+        self._income = {"wage": wage, "bonus": bonus}
 
-def minimum_wage(wage_list):
-    print('Зарплата меньше 20тыс у:')
-    for i, wage in enumerate(wage_list):
-        if wage.isdigit():
-            if int(wage) < 20000:
-                print(wage_list[i - 1])
-
-def average_wage(wage_list):
-    average = 0
-    for i in range(1,len(wage_list),2):
-        average += int(wage_list[i])
-
-    print('Средняя зарплата: ', average / (len(wage_list) / 2))
+class Position(Worker):
+    def get_full_name(self):
+        print(self.name + ' ' + self.surname)
 
 
+    def get_total_income(self):
+        z = self._income.get('wage') + self._income.get('bonus')
+        print(f'{self.position} получает {z} рублей')
 
+unit_one = Position('Вася', 'Иванов', 'менеджер', 200, 50)
+unit_two = Position('Витя', 'Цой', 'музыкант', 100, 10)
 
-def run():
-    wage_list = read_file()
-    minimum_wage(wage_list)
-    average_wage(wage_list)
+unit_one.get_full_name()
+unit_two.get_full_name()
 
-
-run()
+unit_one.get_total_income()
+unit_two.get_total_income()
