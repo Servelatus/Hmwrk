@@ -1,32 +1,38 @@
-# 3. Реализовать базовый класс Worker (работник),
-# в котором определить атрибуты: name, surname, position (должность), income (доход).
-# Последний атрибут должен быть защищенным и ссылаться на словарь, содержащий элементы: оклад и премия,
-# например, {"wage": wage, "bonus": bonus}. Создать класс Position (должность) на базе класса Worker.
-# В классе Position реализовать методы получения полного имени сотрудника (get_full_name) и дохода с учетом премии (get_total_income).
-# Проверить работу примера на реальных данных
-# (создать экземпляры класса Position, передать данные, проверить значения атрибутов, вызвать методы экземпляров).
+# 3. Создайте собственный класс-исключение, который должен проверять содержимое списка на наличие только чисел.
+# Проверить работу исключения на реальном примере. Необходимо запрашивать у пользователя данные и заполнять список.
+# Класс-исключение должен контролировать типы данных элементов списка.
+# Примечание: длина списка не фиксирована. Элементы запрашиваются бесконечно, пока пользователь сам не остановит работу
+# скрипта, введя, например, команду “stop”. При этом скрипт завершается, сформированный список выводится на экран.
+# Подсказка: для данного задания примем, что пользователь может вводить только числа и строки.
+# При вводе пользователем очередного элемента необходимо реализовать проверку типа элемента и вносить его в список,
+# только если введено число. Класс-исключение должен не позволить пользователю ввести текст (не число) и
+# отобразить соответствующее сообщение. При этом работа скрипта не должна завершаться.
 
-class Worker:
-    def __init__(self, name, surname, position, wage, bonus):
-        self.name = name
-        self.surname = surname
-        self.position = position
-        self._income = {"wage": wage, "bonus": bonus}
+class NotNumber(Exception):
+    def __init__(self):
+        pass
 
-class Position(Worker):
-    def get_full_name(self):
-        print(self.name + ' ' + self.surname)
+    @staticmethod
+    def isitnumber(el):
+        if el.isdigit():
+            result = True
+        else:
+            result = False
+        return result
 
+element = ''
+list_numbers =[]
+while True:
+    element = input('введите элемент ')
+    if element == 'stop': break
+    else:
+        try:
+            if NotNumber.isitnumber(element):
+                list_numbers.append(int(element))
+            else:
+                raise NotNumber
+        except NotNumber:
+            print('Это не число!!!')
 
-    def get_total_income(self):
-        z = self._income.get('wage') + self._income.get('bonus')
-        print(f'{self.position} получает {z} рублей')
+print(list_numbers)
 
-unit_one = Position('Вася', 'Иванов', 'менеджер', 200, 50)
-unit_two = Position('Витя', 'Цой', 'музыкант', 100, 10)
-
-unit_one.get_full_name()
-unit_two.get_full_name()
-
-unit_one.get_total_income()
-unit_two.get_total_income()

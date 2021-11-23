@@ -1,27 +1,45 @@
-# 1. Создать класс TrafficLight (светофор)
-# и определить у него один атрибут color (цвет) и метод running (запуск).
-# Атрибут реализовать как приватный. В рамках метода реализовать переключение светофора
-# в режимы: красный, желтый, зеленый. Продолжительность первого состояния (красный) составляет 7 секунд,
-# второго (желтый) — 2 секунды, третьего (зеленый) — на ваше усмотрение.
-# Переключение между режимами должно осуществляться только в указанном порядке (красный, желтый, зеленый).
-# Проверить работу примера, создав экземпляр и вызвав описанный метод.
+# 1. Реализовать класс «Дата»,
+# функция-конструктор которого должна принимать дату в виде строки формата «день-месяц-год».
+# В рамках класса реализовать два метода.
+# Первый, с декоратором @classmethod, должен извлекать число, месяц, год и преобразовывать их тип к типу «Число».
+# Второй, с декоратором @staticmethod, должен проводить валидацию числа, месяца и года (например, месяц — от 1 до 12).
+# Проверить работу полученной структуры на реальных данных.
 
-# Задачу можно усложнить, реализовав проверку порядка режимов,
-# и при его нарушении выводить соответствующее сообщение и завершать скрипт.
-from time import sleep, perf_counter
+class Data:
+    data_list = []
+    def __init__(self, data_str =  str):
 
-class TrafficLight:
+        Data.data_list = data_str.split('-')
 
-     def running():
-            colors = {'red':7, 'yellow':2, 'green':5}
-            start = perf_counter()
-            while True:
+    @classmethod
+    def data_to_int(cls):
+        data_numb = int(''.join(cls.data_list))
+        print(data_numb)
 
-                for c in colors:
-                    print(c)
-                    sleep(colors[c])
-                if perf_counter() - start < 35: break
+    @staticmethod
+    def validation(data_str):
+        month_30 = {4, 6, 9, 11}
+        data_list = data_str.split('-')
+        # Не хватило времени на проверку високосного года!
+        data_list = [int(i) for i in data_list]
 
-svetofor = TrafficLight
-svetofor.running()
+        if 1 <= data_list[1] <= 12 and 1 <= data_list[0] <= 31:
+            if  30 < data_list[0]  and data_list[1] in month_30:
+                return False
+            else:
+                if 28 < data_list[0]  and data_list[1] == 2:
+                    return False
+                else:
+                     return True
+
+        else:
+            return False
+
+
+dat = input('Введите дату: ')
+vremechko = Data(dat)
+if Data.validation(dat):
+    vremechko.data_to_int()
+else:
+    print('Дата введена неправильная какая-то((')
 
